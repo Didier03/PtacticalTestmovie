@@ -16,19 +16,18 @@ import kotlinx.coroutines.launch
 data class MovieDetailScreenRoute(val movieId: Int) : Screen {
     @Composable
     override fun Content() {
-        // Aquí deberías obtener la película según el `movieId` que recibas
         val movieService = remember { HomeViewModel() }
         var movie by remember { mutableStateOf<Movie?>(null) }
         val coroutineScope = rememberCoroutineScope()
 
         LaunchedEffect(movieId) {
             coroutineScope.launch {
-                movie = movieService.getMovieDetails(movieId) // Implementa este método en tu ViewModel
+                movie = movieService.getMovieDetails(movieId)
             }
         }
 
         movie?.let {
             MovieDetailScreen(it)
-        } ?: CircularProgressIndicator() // Muestra un loader mientras carga
+        } ?: CircularProgressIndicator()
     }
 }

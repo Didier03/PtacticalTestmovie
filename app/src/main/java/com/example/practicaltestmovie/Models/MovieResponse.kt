@@ -16,6 +16,7 @@ data class Movie(
     @SerialName("vote_average") val rating: Double,
     @SerialName("release_date") val releaseDate: String,
     @SerialName("overview") val overview: String,
+    @SerialName("adult") val isAdult: Boolean,
     @SerialName("genre_ids") val genreIds: List<Int> = emptyList()
 ) {
     fun getFullPosterPath(): String {
