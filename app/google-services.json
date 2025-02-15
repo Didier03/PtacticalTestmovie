@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "852576128496",
+    "project_id": "practicaltestmovie",
+    "storage_bucket": "practicaltestmovie.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852576128496:android:22ad63b024149b34282135",
+        "android_client_info": {
+          "package_name": "com.example.practicaltestmovie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9pUbRp269MIRhrsHgu3KpzEJTtpJsMqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
