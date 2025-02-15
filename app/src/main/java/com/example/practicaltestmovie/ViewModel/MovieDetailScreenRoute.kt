@@ -10,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.screen.Screen
 import com.example.practicaltestmovie.Models.Movie
+import com.example.practicaltestmovie.Utils.ConstantViews.LoadingScreen
 import com.example.practicaltestmovie.View.MovieDetailScreen
 import kotlinx.coroutines.launch
 
@@ -28,6 +29,6 @@ data class MovieDetailScreenRoute(val movieId: Int) : Screen {
 
         movie?.let {
             MovieDetailScreen(it)
-        } ?: CircularProgressIndicator()
+        } ?: LoadingScreen()
     }
 }

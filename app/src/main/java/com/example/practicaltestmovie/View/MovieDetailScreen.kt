@@ -37,6 +37,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.example.practicaltestmovie.Models.Movie
+import com.example.practicaltestmovie.Utils.ConstantViews.RatingBar
 
 @Composable
 fun MovieDetailScreen(movie: Movie) {
@@ -121,10 +122,15 @@ fun MovieDetailScreen(movie: Movie) {
                 Row {
                     Text("Fecha: ${movie.releaseDate}", color = Color.Gray)
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text("Rating: ${movie.rating}", color = Color.Gray)
-                    Spacer(modifier = Modifier.width(16.dp))
                     Text(if (movie.isAdult) "D" else "A", color = Color.Gray)
-
+                }
+                Row {
+                    RatingBar(
+                        rating = movie.rating / 2,
+                        modifier = Modifier.height(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(" ${movie.rating}", color = Color.Gray)
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(

@@ -1,17 +1,19 @@
 package com.example.practicaltestmovie.View
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -29,8 +31,9 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.practicaltestmovie.Utils.ConstantViews.MovieItem
 import com.example.practicaltestmovie.Models.Movie
+import com.example.practicaltestmovie.Utils.ConstantViews.LoadingScreen
+import com.example.practicaltestmovie.Utils.ConstantViews.MovieItem
 import com.example.practicaltestmovie.ViewModel.HomeViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
@@ -42,11 +45,14 @@ class HomeView : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val movieService = remember { HomeViewModel() }
         var movies by remember { mutableStateOf<List<Movie>>(emptyList()) }
+        var isLoading by remember { mutableStateOf(true) }
         val coroutineScope = rememberCoroutineScope()
 
         LaunchedEffect(Unit) {
             coroutineScope.launch {
+                isLoading = true
                 movies = movieService.getNowPlayingMovies()
+                isLoading = false
             }
         }
 
@@ -67,24 +73,36 @@ class HomeView : Screen {
                     }
                 }) }
         ) { padding ->
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "¡Bienvenido a la aplicación!")
+            ){
+                if (isLoading) {
+                    LoadingScreen()
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(padding)
+                            .padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = "¡Bienvenido a la aplicación!", style = MaterialTheme.typography.headlineSmall)
 
-                Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                LazyColumn {
-                    items(movies) { movie ->
-                        MovieItem(movie = movie, navigator = navigator)
+                        LazyVerticalGrid(
+                            columns = GridCells.Adaptive(minSize = 150.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            items(movies) { movie ->
+                                MovieItem(movie = movie, navigator = navigator)
+                            }
+                        }
                     }
                 }
-
             }
         }
     }
