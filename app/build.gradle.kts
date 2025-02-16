@@ -77,7 +77,6 @@ dependencies {
     implementation(libs.voyager.tabNavigator)
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.koin)
-
     implementation(libs.androidx.navigation.compose)
     /*Cliente*/
     implementation(libs.ktor.client.core)
@@ -92,10 +91,20 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.crashlytics)
-
+    /*images*/
     implementation(libs.coil.compose)
     implementation(libs.coil.network.ktor)
 
     implementation(libs.accompanist.swiperefresh)
+
+    // Google Sign-In
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+// Facebook
+    implementation ("com.facebook.android:facebook-login:16.2.0")
+    implementation("com.google.firebase:firebase-auth")
+
+// Twitter
+   // implementation ("com.twitter.sdk.android:twitter-core:3.1.1")
 
 }

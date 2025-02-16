@@ -57,7 +57,7 @@ fun SearchBar(
             focusedLabelColor = Color.DarkGray,
             cursorColor = Color.DarkGray,
             unfocusedBorderColor = Color.Gray,
-            unfocusedLabelColor = Color.Gray, 
+            unfocusedLabelColor = Color.Gray,
         )
     )
 }
