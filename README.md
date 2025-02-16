@@ -4,6 +4,7 @@ Aplicacion que para ver cartelera de películas
 -Autenticacion Con Firebase
 -Autenticacion Con Google
 -Recordar usuario y contraseña
--consumir API para traer listado de peliculas
+-Consumir API para traer listado de peliculas
+-Buscador de pliculas por titulo
 -Mostrar listado de peliculas
 -Uso de librerías
